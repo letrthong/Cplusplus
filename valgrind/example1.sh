@@ -1,5 +1,9 @@
 g++ example1.cpp  -o  example1
 
-echo "Detect memory leak"
+echo "Check memory"
 echo  ""
 valgrind --tool=memcheck ./example1
+
+echo  ""
+echo "Detect memory leak"
+valgrind --tool=memcheck --leak-check=yes ./example1
