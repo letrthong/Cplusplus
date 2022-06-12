@@ -21,3 +21,6 @@ int main(){
     } 
     return 0;
 }
+
+// https://docs.w3cub.com/cpp/filesystem/is_directory
+// https://en.cppreference.com/w/cpp/filesystem/permissions
