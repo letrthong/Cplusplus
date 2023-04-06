@@ -44,10 +44,11 @@
 #endif
 
 
-#define __STATIC_INLINE static inline //Thong LT
-#define __ASM  asm      //Thong LT
+#define __STATIC_INLINE static inline //Thong LT - Linux
+#define __ASM  asm      //Thong LT - Linux 
 
-#include <stdint.h>  //Thong LT
+#include <stdint.h>  //Thong LT - Linux
+
 /* ###########################  Core Function Access  ########################### */
 /** \ingroup  CMSIS_Core_FunctionInterface
     \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
