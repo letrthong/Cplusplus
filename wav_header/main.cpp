@@ -8,6 +8,13 @@
 using namespace std;
 #include "wave.h"
 
+#include "acoustic_db.h"
+#include <unistd.h>
+     
+     
+#define AUDIO_SAMPLING_FREQUENCY 16000
+#define PCM_BUFFERIN_SIZE 256
+
  
 int  readFile(const char* pathName, char* data) {
     int FileHandle = open(pathName, O_RDONLY);
@@ -54,6 +61,38 @@ int main(){
         cout<< "--------------End Show header information  "<<endl;
     }
 
+
+     AcousticDB_Handler_t DB_Handler;  
+    AcousticDB_Config_t DB_Config;   
+
+    uint32_t error_value = 0;  
+	DB_Handler.sampling_frequency = AUDIO_SAMPLING_FREQUENCY;
+	error_value = AcousticDB_Init(&DB_Handler);
+	if(error_value != 0)
+	{
+		printf("AcousticDB_Init failed \n\r " );
+	}
+	
+	DB_Config.offset = 0;
+	error_value = AcousticDB_setConfig(&DB_Handler,&DB_Config);
+	if(error_value != 0)
+	{
+		printf("AcousticDB_setConfig failed \n\r " );
+	}
+
+    int32_t tempValue = 0;
+   char pcm_buffer[PCM_BUFFERIN_SIZE];
+
+    int count = 0;
+	while(1) {
+		//printk("Hello World! %d \n\r ", count++);
+		usleep(1000);
+		if(AcousticDB_Data_Input(pcm_buffer, PCM_BUFFERIN_SIZE, &DB_Handler))
+		{
+			AcousticDB_Process(&tempValue, &DB_Handler); 
+			printf("%d tempValue=%d \n\r ",  count++, tempValue);  
+		}
+	}  
     return 0;
 }
 
