@@ -10,12 +10,22 @@ using namespace std;
 
 #include "acoustic_db.h"
 #include <unistd.h>
-     
-     
- 
-#define PCM_BUFFERIN_SIZE 1024
+#include "stdio.h"
 
+#include "stdlib.h"
+ #include <string.h>
  
+#define PCM_BUFFERIN_SIZE  256
+
+
+static AcousticDB_Handler_t DB_Handler;
+static AcousticDB_Config_t DB_Config;
+
+
+
+int32_t tempValue = 0;
+char pcm_buffer[PCM_BUFFERIN_SIZE];
+
 int  readFile(const char* pathName, char* data) {
     int FileHandle = open(pathName, O_RDONLY);
      int len = -1;
@@ -37,9 +47,11 @@ int main(){
 	cout<< "hello world "<<endl;
 
 	char header[1024];
+       //https://github.com/alakise/Audio-Spectrogram/tree/master/examples
+        char file_name[] = "sammple/examples_me_saying_merhaba_dunya.wav";
 
-	int len = readFile("sammple/sample.wav", header);
-	//int len = readFile("sammple/CantinaBand3.wav", header);
+        int len = readFile(file_name, header);
+
 	int sample_rate = 16000;
     
 	if(len >= 48){
@@ -65,9 +77,6 @@ int main(){
 	}
 
 
-	AcousticDB_Handler_t DB_Handler;  
-	AcousticDB_Config_t DB_Config;   
-
 	uint32_t error_value = 0;  
 	DB_Handler.sampling_frequency = sample_rate;
 	error_value = AcousticDB_Init(&DB_Handler);
@@ -83,32 +92,31 @@ int main(){
 		printf("AcousticDB_setConfig failed \n\r " );
 	}
 
-	int32_t tempValue = 0;
-	char pcm_buffer[PCM_BUFFERIN_SIZE];
 
     	int count = 0;
     	//int len = -1;
     	len = -1;
-	    int FileHandle = open("sammple/sample.wav", O_RDONLY);
+            int FileHandle = open(file_name, O_RDONLY);
 	     
 	    if (FileHandle == -1) {
 		return len;
 	    }
 	    /*ssize_t bytes_read;*/
 	    	
-	    while(1){
+            while(1){
 	    
-		    len = read(FileHandle, pcm_buffer, PCM_BUFFERIN_SIZE);
-		    if (len == -1) {
+                     memset(pcm_buffer, 0, PCM_BUFFERIN_SIZE);
+                    len = read(FileHandle, pcm_buffer, PCM_BUFFERIN_SIZE);
+                    if (len < 1) {
 			close(FileHandle);
 			return len;
 		    }
 		    
-		    usleep(100);
+                  //  usleep(100);
 		if(AcousticDB_Data_Input(pcm_buffer, len, &DB_Handler))
 		{
 			AcousticDB_Process(&tempValue, &DB_Handler); 
-			printf("%d tempValue=%d len=%d\n\r ",  count++, tempValue, len);  
+                        printf("%d tempValue=%d len=%d\n\r ",  count++, tempValue, len);
 		}
             }
 		    

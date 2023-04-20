@@ -88,7 +88,7 @@ uint32_t AcousticDB_Init(AcousticDB_Handler_t * pHandler)
   uint32_t ret = 0;   
   
   /* FS */
-  if(pHandler->sampling_frequency == 16000 || pHandler->sampling_frequency == 32000 || pHandler->sampling_frequency == 48000 || pHandler->sampling_frequency == 8000)
+  if(pHandler->sampling_frequency == 16000 || pHandler->sampling_frequency == 32000 || pHandler->sampling_frequency == 48000 || pHandler->sampling_frequency == 44100 || pHandler->sampling_frequency == 8000)
   {
     dBInternal->sampling_frequency=pHandler->sampling_frequency;
   }
