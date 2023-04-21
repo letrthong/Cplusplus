@@ -103,6 +103,8 @@ int main(){
 	    }
 	    /*ssize_t bytes_read;*/
 	    	
+            char my_buffer[PCM_BUFFERIN_SIZE] ={};
+            bool hasChange = true;
             while(1){
 	    
                      memset(pcm_buffer, 0, PCM_BUFFERIN_SIZE);
@@ -111,13 +113,27 @@ int main(){
 			close(FileHandle);
 			return len;
 		    }
-		    
-                  //  usleep(100);
-		if(AcousticDB_Data_Input(pcm_buffer, len, &DB_Handler))
-		{
-			AcousticDB_Process(&tempValue, &DB_Handler); 
-                        printf("%d tempValue=%d len=%d\n\r ",  count++, tempValue, len);
-		}
+
+                    if(hasChange == true){
+                            hasChange =false;
+                    //  usleep(100);
+                                      if(AcousticDB_Data_Input(my_buffer, len, &DB_Handler))
+                                      {
+                                              AcousticDB_Process(&tempValue, &DB_Handler);
+                                              printf("%d tempValue=%d len=%d\n\r ",  count++, tempValue, len);
+                                      }
+                        }else{
+                                            hasChange =true;
+
+                                            //  usleep(100);
+                                            if(AcousticDB_Data_Input(pcm_buffer, len, &DB_Handler))
+                                            {
+                                                  AcousticDB_Process(&tempValue, &DB_Handler);
+                                                  printf("%d tempValue=%d len=%d\n\r ",  count++, tempValue, len);
+                                            }
+
+                      }
+
             }
 		    
 	    
