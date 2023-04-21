@@ -15,7 +15,7 @@ using namespace std;
 #include "stdlib.h"
  #include <string.h>
  
-#define PCM_BUFFERIN_SIZE  256
+#define PCM_BUFFERIN_SIZE  48
 
 
 static AcousticDB_Handler_t DB_Handler;
