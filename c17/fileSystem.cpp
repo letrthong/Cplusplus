@@ -1,4 +1,3 @@
-// https://www.programiz.com/cpp-programming/online-compiler/
 #include <fstream> 
 #include <iostream> 
 #include <string> 
@@ -10,27 +9,33 @@ using namespace std;
 int main() 
 {   
     
-    int countryCode = 10;
-    int networkCode = 20;
+    int x = 10;
+    int y = 20;
+    bool status = true;
     ofstream   ofs;
     ofs.open("/tmp/abc.txt");
-    ofs << countryCode << "   "  <<  networkCode ;
+    ofs << x << "   "  <<  y << " " << status ;
     ofs.close();
             
             
     // Open the file "abc.txt" for reading 
     int a = 0;
     int b = 0;
-    
+    bool c;
     ifstream ifs("/tmp/abc.txt"); 
     cout<<"read file"  << endl; 
     
-     ifs >> a  >> b;
+     ifs >> a  >> b >>  c;
    
     ifs.close(); 
     
     
     cout<<"a=" <<  a  << endl; 
     cout<<"b=" << b << endl; 
+    cout<<"c=" << c << endl; 
+    
+    if( c== true) {
+        cout<<" C= true";
+    }
     return 0; 
 }
