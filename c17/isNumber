@@ -1,0 +1,19 @@
+#include <iostream>
+#include <regex>
+#include <string>
+
+int main() {
+    std::string input = "12345";
+    std::regex numberPattern("\\d+");   // 1234 integer
+    // std::regex numberPattern("^-?\\d*(\\.\\d+)?$"); 123.4  float
+
+    if (std::regex_match(input, numberPattern)) {
+        std::cout << "The input is a sequence of digits." << std::endl;
+    } else {
+        std::cout << "The input is not a sequence of digits." << std::endl;
+    }
+
+    return 0;
+}
+
+// https://www.onlinegdb.com/online_c++_compiler
