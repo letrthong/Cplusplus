@@ -31,3 +31,29 @@ Example
 Imagine a smart home system where sensors publish temperature data to the topic "home/temperature". The broker receives these messages and delivers them to all clients subscribed to "home/temperature", such as a mobile app or a data logging service.
 
 Do you have any specific questions about MQTT brokers or how they work?
+
+#
+Asynchronous programming allows a program to perform tasks without waiting for other tasks to complete. This is particularly useful for I/O-bound operations, such as reading from a file or network communication, where waiting for the operation to complete can be inefficient.
+
+Key Concepts
+Non-blocking I/O: Operations that do not block the execution of the program while waiting for I/O operations to complete.
+Event-driven: The program responds to events (such as data being available to read) rather than continuously checking for conditions.
+Asynchronous Mechanisms in Linux
+Linux provides several mechanisms for asynchronous programming:
+
+epoll:
+
+Usage: Efficiently monitors multiple file descriptors to see if I/O is possible.
+Example: epoll_wait() waits for events on the monitored file descriptors.
+select:
+
+Usage: Monitors multiple file descriptors to see if they are ready for I/O.
+Example: select() function checks the status of multiple file descriptors.
+poll:
+
+Usage: Similar to select, but more scalable for a large number of file descriptors.
+Example: poll() function waits for events on multiple file descriptors.
+aio (Asynchronous I/O):
+
+Usage: Provides asynchronous read and write operations.
+Example: aio_read() and aio_write() functions perform non-blocking I/O operations.
