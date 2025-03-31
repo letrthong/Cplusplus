@@ -1,0 +1,16 @@
+#Threads
+A thread is the smallest unit of a process that can be scheduled for execution by the operating system. Threads are sometimes called "lightweight processes" because they share the same memory space and resources of the parent process but can run independently. Here are some key points about threads:
+
+Concurrency: Multiple threads can run concurrently within the same process, allowing for parallel execution of tasks.
+Shared Resources: Threads within the same process share memory and resources, which can lead to efficient communication but also requires careful synchronization to avoid conflicts.
+Context Switching: Switching between threads is generally faster than switching between processes because threads share the same memory space.
+#Subprocesses
+A subprocess is a separate process that is created by a parent process. Subprocesses run independently and have their own memory space. Here are some key points about subprocesses:
+
+Isolation: Subprocesses are isolated from each other, meaning they do not share memory space. This isolation can enhance security and stability.
+Inter-process Communication (IPC): Communication between subprocesses typically requires mechanisms like pipes, sockets, or shared files.
+Resource Management: Subprocesses have their own resources and can be managed independently by the operating system.
+Comparison
+Memory Sharing: Threads share memory within the same process, while subprocesses have separate memory spaces.
+Communication: Threads can communicate more easily through shared memory, but subprocesses require IPC mechanisms.
+Performance: Threads can be more efficient due to shared resources, but subprocesses offer better isolation and stability.
