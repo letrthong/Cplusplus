@@ -57,3 +57,37 @@ aio (Asynchronous I/O):
 
 Usage: Provides asynchronous read and write operations.
 Example: aio_read() and aio_write() functions perform non-blocking I/O operations.
+
+
+Shallow Copy
+A shallow copy creates a new object, but does not create copies of the objects that the original object references. Instead, it copies the references to those objects. This means that changes to the referenced objects in the copied object will also affect the original object.
+
+import copy
+
+original_list = [1, 2, [3, 4]]
+shallow_copied_list = copy.copy(original_list)
+
+shallow_copied_list[2][0] = 99
+print(original_list)  # Output: [1, 2, [99, 4]]
+print(shallow_copied_list)  # Output: [1, 2, [99, 4]]
+
+n this example, modifying the nested list in shallow_copied_list also affects original_list because both lists share the same reference to the nested list.
+
+Deep Copy
+A deep copy creates a new object and recursively copies all objects found in the original object. This means that changes to the copied object do not affect the original object, and vice versa.
+
+Example in Python:
+ import copy
+
+original_list = [1, 2, [3, 4]]
+deep_copied_list = copy.deepcopy(original_list)
+
+deep_copied_list[2][0] = 99
+print(original_list)  # Output: [1, 2, [3, 4]]
+print(deep_copied_list)  # Output: [1, 2, [99, 4]]
+
+In this example, modifying the nested list in deep_copied_list does not affect original_list because deep_copied_list has its own separate copy of the nested list.
+
+Summary
+Shallow Copy: Copies the object and references to the objects it contains. Changes to the referenced objects affect both the original and the copied object.
+Deep Copy: Copies the object and all objects it references, recursively. Changes to the copied object do not affect the original object.
