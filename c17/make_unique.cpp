@@ -2,24 +2,27 @@
 #include <memory>
 #include <vector>
 
-class User {
-public:
-    std::string name;
-    User(std::string n) : name(n) { std::cout << "User Created: " << name << "\n"; }
-    ~User() { std::cout << "User Destroyed: " << name << "\n"; }
-};
-
+ 
 int main() {
-    // 1. Create a simple unique_ptr (Preferred)
-    auto userPtr = std::make_unique<User>("Alice");
+    auto ptr1 = std::make_unique<int>(10);
 
-    // 2. Create a unique_ptr to an array of 5 integers
-    auto arrPtr = std::make_unique<int[]>(5); 
-    arrPtr[0] = 10; // Use it like a normal array
-
-    // 3. Move ownership to a vector
-    std::vector<std::unique_ptr<User>> users;
-    users.push_back(std::move(userPtr)); // userPtr is now empty (nullptr)
-
+// OK: Chuyển quyền sở hữu từ ptr1 sang ptr2
+   auto ptr2 = std::move(ptr1);
+   
+      // Cách kiểm tra an toàn:
+    if (ptr1) {
+        // Không bao giờ chạy vào đây
+    } else {
+        std::cout << "ptr1 da rong! \n"; 
+    }
+    
+    if(ptr2){
+        std::cout << "Gia tri la: " << *ptr2 << "\n";
+        
+        ptr2.reset(); 
+        if(ptr2){
+          std::cout << "Gia tri la: " << *ptr2 << "\n";
+        }
+    }
     return 0;
 }
